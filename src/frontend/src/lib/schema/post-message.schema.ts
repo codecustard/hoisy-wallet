@@ -39,10 +39,13 @@ export const POST_MESSAGE_REQUESTS = [
 	'triggerDip20WalletTimer',
 	'stopBtcWalletTimer',
 	'stopSolWalletTimer',
+	'stopKaspaWalletTimer',
 	'startBtcWalletTimer',
 	'startSolWalletTimer',
+	'startKaspaWalletTimer',
 	'triggerBtcWalletTimer',
 	'triggerSolWalletTimer',
+	'triggerKaspaWalletTimer',
 	'stopBtcStatusesTimer',
 	'startBtcStatusesTimer',
 	'triggerBtcStatusesTimer',
@@ -121,6 +124,7 @@ export const PostMessageResponseStatusSchema = z.enum([
 	'syncIcWalletStatus',
 	'syncBtcWalletStatus',
 	'syncSolWalletStatus',
+	'syncKaspaWalletStatus',
 	'syncBtcStatusesStatus',
 	'syncCkMinterInfoStatus',
 	'syncCkBTCUpdateBalanceStatus'
@@ -133,6 +137,7 @@ export const PostMessageErrorResponseSchema = z.enum([
 	'syncDip20WalletError',
 	'syncBtcWalletError',
 	'syncSolWalletError',
+	'syncKaspaWalletError',
 	'syncBtcStatusesError',
 	'syncCkMinterInfoError'
 ]);
@@ -146,6 +151,7 @@ export const PostMessageResponseSchema = z.enum([
 	'syncDip20Wallet',
 	'syncBtcWallet',
 	'syncSolWallet',
+	'syncKaspaWallet',
 	'syncIcpWalletCleanUp',
 	'syncIcrcWalletCleanUp',
 	'syncDip20WalletCleanUp',
