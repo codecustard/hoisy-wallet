@@ -329,6 +329,7 @@ type TokenAccountId = variant {
 	Btc : BtcAddress;
 	Eth : EthAddress;
 	Sol : text;
+	Kaspa : EthAddress;
 	Icrcv2 : Icrcv2AccountId
 };
 type TokenSection = variant { Spam; Hidden };
