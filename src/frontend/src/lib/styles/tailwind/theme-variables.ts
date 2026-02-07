@@ -163,8 +163,8 @@ export const themeVariables = {
 
 	// custom hard coded gradient colors
 	gradient: {
-		'default-0': '#016DFC',
-		'default-100': '#004EB5',
+		'default-0': '#2DD4BF',
+		'default-100': '#0D9488',
 		'icp-0': '#3607B1',
 		'icp-100': '#1E0071',
 		'btc-0': '#F7931A',
