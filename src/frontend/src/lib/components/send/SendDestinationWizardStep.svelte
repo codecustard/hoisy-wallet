@@ -179,11 +179,7 @@
 		</div>
 	{:else if isNetworkIdKaspa($sendTokenNetworkId)}
 		<div data-tid={testId}>
-			<KaspaSendDestination
-				{onQRCodeScan}
-				bind:destination
-				bind:invalidDestination
-			/>
+			<KaspaSendDestination {onQRCodeScan} bind:destination bind:invalidDestination />
 			<SendDestinationTabs
 				onNext={next}
 				bind:destination

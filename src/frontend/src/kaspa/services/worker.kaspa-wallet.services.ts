@@ -1,23 +1,17 @@
 import { KASPA_MAINNET_TOKEN } from '$env/tokens/tokens.kaspa.env';
-import { AppWorker } from '$lib/services/_worker.services';
-import {
-	kaspaAddressMainnetStore,
-	kaspaAddressTestnetStore
-} from '$lib/stores/address.store';
-import type { WalletWorker } from '$lib/types/listener';
-import type { PostMessage } from '$lib/types/post-message';
-import type { Token, TokenId } from '$lib/types/token';
-import type { WorkerData } from '$lib/types/worker';
-import { isNetworkIdKaspaTestnet } from '$kaspa/utils/kaspa-network.utils';
 import type { KaspaNetworkType } from '$kaspa/providers/kaspa-api.providers';
-import {
-	syncWallet,
-	syncWalletError
-} from '$kaspa/services/kaspa-listener.services';
+import { syncWallet, syncWalletError } from '$kaspa/services/kaspa-listener.services';
 import type {
 	KaspaPostMessageDataResponseWallet,
 	PostMessageDataRequestKaspa
 } from '$kaspa/types/kaspa-post-message';
+import { isNetworkIdKaspaTestnet } from '$kaspa/utils/kaspa-network.utils';
+import { AppWorker } from '$lib/services/_worker.services';
+import { kaspaAddressMainnetStore, kaspaAddressTestnetStore } from '$lib/stores/address.store';
+import type { WalletWorker } from '$lib/types/listener';
+import type { PostMessage } from '$lib/types/post-message';
+import type { Token, TokenId } from '$lib/types/token';
+import type { WorkerData } from '$lib/types/worker';
 import { assertNonNullish } from '@dfinity/utils';
 import { get } from 'svelte/store';
 

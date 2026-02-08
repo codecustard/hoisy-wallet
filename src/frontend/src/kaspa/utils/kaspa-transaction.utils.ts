@@ -4,10 +4,10 @@
  * without requiring @kaspa/core-lib or WASM dependencies.
  */
 
+import type { KaspaSubmitTransactionRequest, KaspaUtxo } from '$kaspa/types/kaspa-api';
+import { decodeKaspaAddress } from '$kaspa/utils/kaspa-bech32.utils';
 import { blake2b } from '@noble/hashes/blake2b';
 import { sha256 } from '@noble/hashes/sha256';
-import { decodeKaspaAddress } from '$kaspa/utils/kaspa-bech32.utils';
-import type { KaspaUtxo, KaspaSubmitTransactionRequest } from '$kaspa/types/kaspa-api';
 
 // Kaspa transaction version
 const TX_VERSION = 0;

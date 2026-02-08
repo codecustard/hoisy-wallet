@@ -8,10 +8,7 @@
 	import { TOKEN_MENU_KASPA } from '$lib/constants/test-ids.constants';
 	import { networkId } from '$lib/derived/network.derived';
 	import { pageToken } from '$lib/derived/page-token.derived';
-	import {
-		kaspaAddressMainnetStore,
-		kaspaAddressTestnetStore
-	} from '$lib/stores/address.store';
+	import { kaspaAddressMainnetStore, kaspaAddressTestnetStore } from '$lib/stores/address.store';
 	import { i18n } from '$lib/stores/i18n.store';
 	import { mapAddress } from '$lib/utils/address.utils';
 	import { isNetworkIdKASMainnet } from '$lib/utils/network.utils';

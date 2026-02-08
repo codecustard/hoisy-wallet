@@ -19,6 +19,7 @@ import {
 	getAllIcTransactions,
 	getIcExtendedTransactions
 } from '$icp/utils/ic-transactions.utils';
+import type { KaspaCertifiedTransactionsData } from '$kaspa/stores/kaspa-transactions.store';
 import { MICRO_TRANSACTION_USD_THRESHOLD, ZERO } from '$lib/constants/app.constants';
 import type { CertifiedStoreData } from '$lib/stores/certified.store';
 import type { ExchangesData } from '$lib/types/exchange';
@@ -39,7 +40,6 @@ import {
 	isNetworkIdSepolia,
 	isNetworkIdSolana
 } from '$lib/utils/network.utils';
-import type { KaspaCertifiedTransactionsData } from '$kaspa/stores/kaspa-transactions.store';
 import type { SolCertifiedTransactionsData } from '$sol/stores/sol-transactions.store';
 import type { SolTransactionUi } from '$sol/types/sol-transaction';
 import { isNullish, nonNullish } from '@dfinity/utils';

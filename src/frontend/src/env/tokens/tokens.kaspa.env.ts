@@ -1,9 +1,9 @@
-import kaspa from '$kaspa/assets/kaspa.svg';
 import {
 	KASPA_MAINNET_ENABLED,
 	KASPA_MAINNET_NETWORK,
 	KASPA_TESTNET_NETWORK
 } from '$env/networks/networks.kaspa.env';
+import kaspa from '$kaspa/assets/kaspa.svg';
 import type { RequiredToken, TokenId } from '$lib/types/token';
 import { defineSupportedTokens } from '$lib/utils/env.tokens.utils';
 import { parseTokenId } from '$lib/validation/token.validation';

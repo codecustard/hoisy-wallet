@@ -332,11 +332,11 @@ type Token = variant {
 	Erc1155 : ErcToken
 };
 type TokenAccountId = variant {
-  Btc : BtcAddress;
-  Eth : EthAddress;
-  Kaspa : KaspaAddress;
-  Sol : text;
-  Icrcv2 : Icrcv2AccountId
+	Btc : BtcAddress;
+	Eth : EthAddress;
+	Kaspa : KaspaAddress;
+	Sol : text;
+	Icrcv2 : Icrcv2AccountId
 };
 type TokenSection = variant { Spam; Hidden };
 type TopUpCyclesLedgerError = variant {

@@ -1,14 +1,5 @@
 import { KASPA_MAINNET_TOKEN } from '$env/tokens/tokens.kaspa.env';
-import { KASPA_WALLET_TIMER_INTERVAL_MILLIS } from '$lib/constants/app.constants';
-import { SchedulerTimer, type Scheduler, type SchedulerJobData } from '$lib/schedulers/scheduler';
-import { retryWithDelay } from '$lib/services/rest.services';
-import type { OptionIdentity } from '$lib/types/identity';
-import type {
-	PostMessageCommon,
-	PostMessageDataResponseError
-} from '$lib/types/post-message';
-import type { CertifiedData } from '$lib/types/store';
-import type { Option } from '$lib/types/utils';
+import type { KaspaNetworkType } from '$kaspa/providers/kaspa-api.providers';
 import { getKaspaBalance, getKaspaTransactions } from '$kaspa/providers/kaspa-api.providers';
 import type { KaspaCertifiedTransaction } from '$kaspa/stores/kaspa-transactions.store';
 import type { KaspaAddress } from '$kaspa/types/address';
@@ -18,7 +9,13 @@ import type {
 	PostMessageDataRequestKaspa
 } from '$kaspa/types/kaspa-post-message';
 import type { KaspaTransactionUi } from '$kaspa/types/kaspa-transaction';
-import type { KaspaNetworkType } from '$kaspa/providers/kaspa-api.providers';
+import { KASPA_WALLET_TIMER_INTERVAL_MILLIS } from '$lib/constants/app.constants';
+import { SchedulerTimer, type Scheduler, type SchedulerJobData } from '$lib/schedulers/scheduler';
+import { retryWithDelay } from '$lib/services/rest.services';
+import type { OptionIdentity } from '$lib/types/identity';
+import type { PostMessageCommon, PostMessageDataResponseError } from '$lib/types/post-message';
+import type { CertifiedData } from '$lib/types/store';
+import type { Option } from '$lib/types/utils';
 import { assertNonNullish, isNullish, jsonReplacer, nonNullish } from '@dfinity/utils';
 
 interface LoadKaspaWalletParams {
@@ -40,10 +37,7 @@ interface KaspaWalletData {
 /**
  * Map API transaction to UI transaction format
  */
-const mapTransactionToUi = (
-	tx: KaspaTransaction,
-	address: KaspaAddress
-): KaspaTransactionUi => {
+const mapTransactionToUi = (tx: KaspaTransaction, address: KaspaAddress): KaspaTransactionUi => {
 	// Determine if this is a send or receive transaction
 	const isReceive = tx.outputs.some(
 		(output) => output.verboseData?.scriptPublicKeyAddress === address
@@ -92,9 +86,7 @@ export class KaspaWalletScheduler implements Scheduler<PostMessageDataRequestKas
 	}
 
 	protected setRef(data: PostMessageDataRequestKaspa | undefined) {
-		this.#ref = nonNullish(data)
-			? `${KASPA_MAINNET_TOKEN.symbol}-${data.kaspaNetwork}`
-			: undefined;
+		this.#ref = nonNullish(data) ? `${KASPA_MAINNET_TOKEN.symbol}-${data.kaspaNetwork}` : undefined;
 	}
 
 	async start(data: PostMessageDataRequestKaspa | undefined) {
@@ -165,7 +157,10 @@ export class KaspaWalletScheduler implements Scheduler<PostMessageDataRequestKas
 		this.syncWalletData({ response: { balance, transactions } });
 	};
 
-	private syncWallet = async ({ identity, data }: SchedulerJobData<PostMessageDataRequestKaspa>) => {
+	private syncWallet = async ({
+		identity,
+		data
+	}: SchedulerJobData<PostMessageDataRequestKaspa>) => {
 		assertNonNullish(data, 'No data provided to get Kaspa balance.');
 
 		try {

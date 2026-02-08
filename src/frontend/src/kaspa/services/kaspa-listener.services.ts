@@ -1,8 +1,8 @@
+import { kaspaTransactionsStore } from '$kaspa/stores/kaspa-transactions.store';
+import type { KaspaPostMessageDataResponseWallet } from '$kaspa/types/kaspa-post-message';
 import { balancesStore } from '$lib/stores/balances.store';
 import { toastsError } from '$lib/stores/toasts.store';
 import type { TokenId } from '$lib/types/token';
-import { kaspaTransactionsStore } from '$kaspa/stores/kaspa-transactions.store';
-import type { KaspaPostMessageDataResponseWallet } from '$kaspa/types/kaspa-post-message';
 import { jsonReviver, nonNullish } from '@dfinity/utils';
 
 export const syncWallet = ({

@@ -4,7 +4,6 @@ import { ETHEREUM_TOKEN } from '$env/tokens/tokens.eth.env';
 import { ICP_TOKEN, TESTICP_TOKEN } from '$env/tokens/tokens.icp.env';
 import { KASPA_MAINNET_TOKEN } from '$env/tokens/tokens.kaspa.env';
 import { SOLANA_TOKEN } from '$env/tokens/tokens.sol.env';
-import { enabledKaspaTokens } from '$kaspa/derived/tokens.derived';
 import { erc1155Tokens } from '$eth/derived/erc1155.derived';
 import { erc20Tokens } from '$eth/derived/erc20.derived';
 import { erc721Tokens } from '$eth/derived/erc721.derived';
@@ -18,6 +17,7 @@ import { icrcChainFusionDefaultTokens, icrcTokens } from '$icp/derived/icrc.deri
 import { defaultIcpTokens } from '$icp/derived/tokens.derived';
 import type { IcToken } from '$icp/types/ic-token';
 import { isTokenIc } from '$icp/utils/icrc.utils';
+import { enabledKaspaTokens } from '$kaspa/derived/tokens.derived';
 import { CustomTokenSection } from '$lib/enums/custom-token-section';
 import type { CustomToken } from '$lib/types/custom-token';
 import type { NonFungibleToken } from '$lib/types/nft';

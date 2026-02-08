@@ -1,10 +1,10 @@
+import type { KaspaTransactionUi } from '$kaspa/types/kaspa-transaction';
 import type { CertifiedStoreData } from '$lib/stores/certified.store';
 import {
 	initTransactionsStore,
 	type CertifiedTransaction,
 	type TransactionsData
 } from '$lib/stores/transactions.store';
-import type { KaspaTransactionUi } from '$kaspa/types/kaspa-transaction';
 
 export type KaspaCertifiedTransaction = CertifiedTransaction<KaspaTransactionUi>;
 

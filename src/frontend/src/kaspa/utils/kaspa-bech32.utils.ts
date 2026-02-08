@@ -19,13 +19,7 @@ for (let i = 0; i < CHARSET.length; i++) {
  * Uses different generator values than standard bech32.
  */
 const polymod = (values: number[]): bigint => {
-	const GENERATORS = [
-		0x98f2bc8e61n,
-		0x79b76d99e2n,
-		0xf33e5fb3c4n,
-		0xae2eabe2a8n,
-		0x1e4f43e470n
-	];
+	const GENERATORS = [0x98f2bc8e61n, 0x79b76d99e2n, 0xf33e5fb3c4n, 0xae2eabe2a8n, 0x1e4f43e470n];
 
 	let chk = 1n;
 	for (const value of values) {
@@ -121,9 +115,7 @@ export const verifyKaspaChecksum = (hrp: string, data: number[]): boolean => {
  * @param address - Full Kaspa address string
  * @returns Object with hrp and decoded data, or null if invalid
  */
-export const decodeKaspaAddress = (
-	address: string
-): { hrp: string; data: number[] } | null => {
+export const decodeKaspaAddress = (address: string): { hrp: string; data: number[] } | null => {
 	const colonIndex = address.indexOf(':');
 	if (colonIndex === -1) {
 		return null;

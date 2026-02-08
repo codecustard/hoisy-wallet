@@ -1,28 +1,19 @@
-import type { KaspaAddress } from '$kaspa/types/address';
 import {
 	KASPA_MAINNET_NETWORK_ID,
 	KASPA_TESTNET_NETWORK_ID
 } from '$env/networks/networks.kaspa.env';
+import type { KaspaAddress } from '$kaspa/types/address';
+import { encodeKaspaAddress, toWords } from '$kaspa/utils/kaspa-bech32.utils';
 import { getGenericEcdsaPublicKey } from '$lib/api/signer.api';
-import {
-	kaspaAddressMainnet,
-	kaspaAddressTestnet
-} from '$lib/derived/address.derived';
-import {
-	loadTokenAddress,
-	type LoadTokenAddressParams
-} from '$lib/services/address.services';
-import {
-	kaspaAddressMainnetStore,
-	kaspaAddressTestnetStore
-} from '$lib/stores/address.store';
+import { kaspaAddressMainnet, kaspaAddressTestnet } from '$lib/derived/address.derived';
+import { loadTokenAddress, type LoadTokenAddressParams } from '$lib/services/address.services';
+import { kaspaAddressMainnetStore, kaspaAddressTestnetStore } from '$lib/stores/address.store';
 import { i18n } from '$lib/stores/i18n.store';
 import type { OptionIdentity } from '$lib/types/identity';
 import type { NetworkId } from '$lib/types/network';
 import type { ResultSuccess } from '$lib/types/utils';
 import { isNetworkIdKASTestnet } from '$lib/utils/network.utils';
 import { assertNonNullish } from '@dfinity/utils';
-import { encodeKaspaAddress, toWords } from '$kaspa/utils/kaspa-bech32.utils';
 import { get } from 'svelte/store';
 
 // Kaspa uses secp256k1, same as Bitcoin

@@ -235,7 +235,14 @@
 		{:else if currentStep?.name === WizardStepsSend.SENDING}
 			<InProgressWizard progressStep={sendProgressStep} steps={sendSteps($i18n)} />
 		{:else if currentStep?.name === WizardStepsSend.SEND}
-			<KaspaSendForm {onBack} {onNext} {onTokensList} {selectedContact} bind:destination bind:amount>
+			<KaspaSendForm
+				{onBack}
+				{onNext}
+				{onTokensList}
+				{selectedContact}
+				bind:destination
+				bind:amount
+			>
 				{#snippet cancel()}
 					<ButtonBack onclick={back} />
 				{/snippet}

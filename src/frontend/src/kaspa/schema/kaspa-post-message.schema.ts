@@ -1,7 +1,7 @@
+import type { KaspaNetworkType } from '$kaspa/providers/kaspa-api.providers';
+import type { KaspaAddress } from '$kaspa/types/address';
 import { PostMessageDataResponseSchema } from '$lib/schema/post-message.schema';
 import type { CertifiedData } from '$lib/types/store';
-import type { KaspaAddress } from '$kaspa/types/address';
-import type { KaspaNetworkType } from '$kaspa/providers/kaspa-api.providers';
 import * as z from 'zod';
 
 export const PostMessageDataRequestKaspaSchema = z.object({

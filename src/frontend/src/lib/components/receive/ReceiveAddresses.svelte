@@ -8,10 +8,7 @@
 	} from '$env/networks/networks.btc.env';
 	import { ETHEREUM_NETWORK } from '$env/networks/networks.eth.env';
 	import { ICP_NETWORK } from '$env/networks/networks.icp.env';
-	import {
-		KASPA_MAINNET_NETWORK,
-		KASPA_TESTNET_NETWORK
-	} from '$env/networks/networks.kaspa.env';
+	import { KASPA_MAINNET_NETWORK, KASPA_TESTNET_NETWORK } from '$env/networks/networks.kaspa.env';
 	import {
 		SOLANA_DEVNET_NETWORK,
 		SOLANA_LOCAL_NETWORK,

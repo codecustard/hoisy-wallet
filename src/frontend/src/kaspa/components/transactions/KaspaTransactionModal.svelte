@@ -32,7 +32,16 @@
 
 	const { transaction, token }: Props = $props();
 
-	let { from, value, timestamp, id, to: toAddresses, type, status, blueScore } = $derived(transaction);
+	let {
+		from,
+		value,
+		timestamp,
+		id,
+		to: toAddresses,
+		type,
+		status,
+		blueScore
+	} = $derived(transaction);
 
 	// Get first recipient address for display
 	let to = $derived(toAddresses?.[0]);

@@ -1,6 +1,6 @@
+import type { KaspaAddress } from '$kaspa/types/address';
 import type { kaspaTransactionTypes } from '$lib/schema/transaction.schema';
 import type { TransactionId, TransactionType, TransactionUiCommon } from '$lib/types/transaction';
-import type { KaspaAddress } from '$kaspa/types/address';
 
 export type KaspaTransactionType = Extract<
 	TransactionType,

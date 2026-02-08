@@ -22,7 +22,9 @@
 	// Kaspa transactions can have multiple recipients - display first one
 	let toAddress = $derived(to?.[0]);
 
-	let transactionStatus: TransactionStatus = $derived(status === 'pending' ? 'pending' : 'confirmed');
+	let transactionStatus: TransactionStatus = $derived(
+		status === 'pending' ? 'pending' : 'confirmed'
+	);
 
 	let displayAmount = $derived(nonNullish(value) ? (type === 'send' ? value * -1n : value) : value);
 

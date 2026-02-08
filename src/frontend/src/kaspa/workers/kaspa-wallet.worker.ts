@@ -1,6 +1,6 @@
-import type { PostMessage } from '$lib/types/post-message';
 import { KaspaWalletScheduler } from '$kaspa/schedulers/kaspa-wallet.scheduler';
 import type { PostMessageDataRequestKaspa } from '$kaspa/types/kaspa-post-message';
+import type { PostMessage } from '$lib/types/post-message';
 
 const scheduler: KaspaWalletScheduler = new KaspaWalletScheduler();
 

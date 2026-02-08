@@ -23,14 +23,7 @@
 		onSend: () => void;
 	}
 
-	const {
-		destination = '',
-		amount,
-		networkId,
-		selectedContact,
-		onBack,
-		onSend
-	}: Props = $props();
+	const { destination = '', amount, networkId, selectedContact, onBack, onSend }: Props = $props();
 
 	const { feeStore: fee, feeTokenIdStore: feeTokenId }: KaspaFeeContext =
 		getContext<KaspaFeeContext>(KASPA_FEE_CONTEXT_KEY);

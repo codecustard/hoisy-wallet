@@ -1,5 +1,5 @@
-import type { KaspaNetwork } from '$kaspa/types/network';
 import { KASPA_MAINNET_EXPLORER_URL, KASPA_TESTNET_EXPLORER_URL } from '$env/explorers.env';
+import type { KaspaNetwork } from '$kaspa/types/network';
 import type { NetworkId } from '$lib/types/network';
 import { defineSupportedNetworks } from '$lib/utils/env.networks.utils';
 import { parseEnabledMainnetBoolEnvVar } from '$lib/utils/env.utils';
@@ -45,4 +45,6 @@ export const SUPPORTED_KASPA_MAINNET_NETWORKS: KaspaNetwork[] = SUPPORTED_KASPA_
 	({ env }) => env === 'mainnet'
 );
 
-export const SUPPORTED_KASPA_NETWORK_IDS: NetworkId[] = SUPPORTED_KASPA_NETWORKS.map(({ id }) => id);
+export const SUPPORTED_KASPA_NETWORK_IDS: NetworkId[] = SUPPORTED_KASPA_NETWORKS.map(
+	({ id }) => id
+);

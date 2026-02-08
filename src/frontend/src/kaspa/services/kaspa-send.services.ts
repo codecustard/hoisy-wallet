@@ -7,32 +7,32 @@
  * - Kaspa public API for broadcasting
  */
 
-import type { KaspaAddress } from '$kaspa/types/address';
-import type { KaspaUtxo } from '$kaspa/types/kaspa-api';
-import {
-	type KaspaNetworkType,
-	type KaspaSignedTransaction,
-	type KaspaUtxosFee,
-	KaspaSendError,
-	KaspaSendValidationError,
-	KASPA_DUST_THRESHOLD
-} from '$kaspa/types/kaspa-send';
 import {
 	getKaspaFeeEstimate,
 	getKaspaUtxos,
 	submitKaspaTransaction
 } from '$kaspa/providers/kaspa-api.providers';
+import type { KaspaAddress } from '$kaspa/types/address';
+import type { KaspaUtxo } from '$kaspa/types/kaspa-api';
 import {
+	KASPA_DUST_THRESHOLD,
+	KaspaSendError,
+	KaspaSendValidationError,
+	type KaspaNetworkType,
+	type KaspaSignedTransaction,
+	type KaspaUtxosFee
+} from '$kaspa/types/kaspa-send';
+import { isKaspaAddress } from '$kaspa/utils/kaspa-address.utils';
+import {
+	applySignatures,
 	buildUnsignedTransaction,
 	calculateAllSighashes,
-	applySignatures,
 	transactionToApiFormat
 } from '$kaspa/utils/kaspa-transaction.utils';
-import { isKaspaAddress } from '$kaspa/utils/kaspa-address.utils';
 import { signWithGenericEcdsa } from '$lib/api/signer.api';
+import { i18n } from '$lib/stores/i18n.store';
 import type { OptionIdentity } from '$lib/types/identity';
 import { assertNonNullish } from '@dfinity/utils';
-import { i18n } from '$lib/stores/i18n.store';
 import { get } from 'svelte/store';
 
 // Kaspa ECDSA key configuration
@@ -193,7 +193,12 @@ export const sendKaspa = async ({
 	}
 
 	// Select UTXOs and calculate fee
-	const { selectedUtxos, fee, change, error: utxoError } = await selectUtxosForSend({
+	const {
+		selectedUtxos,
+		fee,
+		change,
+		error: utxoError
+	} = await selectUtxosForSend({
 		address: source,
 		amount,
 		network
