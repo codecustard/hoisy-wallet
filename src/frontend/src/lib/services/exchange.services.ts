@@ -15,7 +15,7 @@ import {
 	formatKongSwapToCoingeckoPrices
 } from '$lib/utils/exchange.utils';
 import type { SplTokenAddress } from '$sol/types/spl';
-import { nonNullish } from '@dfinity/utils';
+import { isNullish, nonNullish } from '@dfinity/utils';
 
 const fetchIcrcPricesFromCoingecko = (
 	ledgerCanisterIds: LedgerCanisterIdText[]
@@ -42,9 +42,9 @@ const fetchIcrcPricesFromKongSwap = async (
 // Until we find a proper IC solution (like the exchange canister, for example), we use this workaround.
 export const exchangeRateUsdToCurrency = async (
 	currency: Currency
-): Promise<number | undefined> => {
+): Promise<{ rate: number } | undefined> => {
 	if (currency === Currency.USD) {
-		return 1;
+		return { rate: 1 };
 	}
 
 	const prices = await simplePrice({
@@ -56,7 +56,13 @@ export const exchangeRateUsdToCurrency = async (
 	const btcToUsd = prices?.bitcoin?.usd;
 	const btcToCurrency = prices?.bitcoin?.[currency];
 
-	return nonNullish(btcToUsd) && nonNullish(btcToCurrency) ? btcToUsd / btcToCurrency : undefined;
+	if (isNullish(btcToUsd) || isNullish(btcToCurrency)) {
+		return;
+	}
+
+	const rate = btcToUsd / btcToCurrency;
+
+	return { rate };
 };
 
 export const exchangeRateETHToUsd = (): Promise<CoingeckoSimplePriceResponse | null> =>
