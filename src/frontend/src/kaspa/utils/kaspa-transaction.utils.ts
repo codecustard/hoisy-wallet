@@ -4,10 +4,10 @@
  * without requiring @kaspa/core-lib or WASM dependencies.
  */
 
+import type { KaspaSubmitTransactionRequest, KaspaUtxo } from '$kaspa/types/kaspa-api';
+import { decodeKaspaAddress, encodeKaspaAddress, toWords } from '$kaspa/utils/kaspa-bech32.utils';
 import { blake2b } from '@noble/hashes/blake2b';
 import { sha256 } from '@noble/hashes/sha256';
-import { decodeKaspaAddress } from '$kaspa/utils/kaspa-bech32.utils';
-import type { KaspaUtxo, KaspaSubmitTransactionRequest } from '$kaspa/types/kaspa-api';
 
 // Kaspa transaction version
 const TX_VERSION = 0;
@@ -197,6 +197,69 @@ export const addressToScriptPublicKey = (address: string): string => {
 	}
 
 	return buildScriptPublicKey(payload.publicKey);
+};
+
+/**
+ * Extract public key from a P2PK scriptPublicKey.
+ * Supports both Schnorr (32-byte) and ECDSA (33-byte) public keys.
+ *
+ * P2PK script format:
+ * - ECDSA: OP_DATA_33 (0x21) + 33-byte pubkey + OP_CHECKSIGECDSA (0xab)
+ * - Schnorr: OP_DATA_32 (0x20) + 32-byte pubkey + OP_CHECKSIG (0xac)
+ *
+ * @param scriptHex - Hex-encoded scriptPublicKey
+ * @returns Object with public key and type, or null if not P2PK
+ */
+export const extractPublicKeyFromScript = (
+	scriptHex: string
+): { publicKey: Uint8Array; type: number } | null => {
+	try {
+		const script = hexToBytes(scriptHex);
+
+		// Check for ECDSA P2PK: OP_DATA_33 <33 bytes> OP_CHECKSIGECDSA
+		if (script.length === 35 && script[0] === OP_DATA_33 && script[34] === OP_CHECKSIGECDSA) {
+			return {
+				publicKey: script.slice(1, 34),
+				type: ADDRESS_TYPE_ECDSA
+			};
+		}
+
+		// Check for Schnorr P2PK: OP_DATA_32 <32 bytes> OP_CHECKSIG
+		if (script.length === 34 && script[0] === OP_DATA_32 && script[33] === OP_CHECKSIG) {
+			return {
+				publicKey: script.slice(1, 33),
+				type: ADDRESS_TYPE_SCHNORR
+			};
+		}
+
+		return null;
+	} catch {
+		return null;
+	}
+};
+
+/**
+ * Convert a scriptPublicKey to a Kaspa address.
+ * Currently only supports P2PK (Pay to Public Key) scripts.
+ *
+ * @param scriptHex - Hex-encoded scriptPublicKey
+ * @param hrp - Human-readable prefix ('kaspa' for mainnet, 'kaspatest' for testnet)
+ * @returns Kaspa address string, or null if script type is not supported
+ */
+export const scriptPublicKeyToAddress = (scriptHex: string, hrp: string): string | null => {
+	const payload = extractPublicKeyFromScript(scriptHex);
+	if (!payload) {
+		return null;
+	}
+
+	// Build address payload: [type byte] + [public key bytes]
+	const addressPayload = new Uint8Array(1 + payload.publicKey.length);
+	addressPayload[0] = payload.type;
+	addressPayload.set(payload.publicKey, 1);
+
+	// Convert to 5-bit words and encode
+	const words = toWords(addressPayload);
+	return encodeKaspaAddress(hrp, words);
 };
 
 /**

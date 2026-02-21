@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { isNullish, nonNullish } from '@dfinity/utils';
 	import { type Component, type Snippet, untrack } from 'svelte';
+	import { normalizeTimestampToSeconds } from '$icp/utils/date.utils';
 	import { alchemyProviders } from '$eth/providers/alchemy.providers';
 	import type { EthNonFungibleToken } from '$eth/types/nft';
 	import { isTokenErc } from '$eth/utils/erc.utils';
@@ -217,7 +218,7 @@
 				{#if nonNullish(timestamp)}
 					<span class="text-xs sm:text-sm" data-tid="receive-tokens-modal-transaction-timestamp">
 						{formatSecondsToDate({
-							seconds: Number(timestamp),
+							seconds: normalizeTimestampToSeconds(timestamp),
 							language: $currentLanguage,
 							formatOptions: {
 								hour: '2-digit',

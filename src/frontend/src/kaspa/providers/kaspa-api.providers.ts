@@ -114,9 +114,9 @@ export class KaspaApiProvider {
 		const url = `${this.baseUrl}/addresses/${address}/full-transactions?${params}`;
 
 		try {
-			const response = await fetchKaspaApi<KaspaTransaction[] | { transactions: KaspaTransaction[] }>(
-				url
-			);
+			const response = await fetchKaspaApi<
+				KaspaTransaction[] | { transactions: KaspaTransaction[] }
+			>(url);
 
 			// Handle both array response and wrapped response formats
 			if (Array.isArray(response)) {
@@ -280,9 +280,7 @@ export const submitKaspaTransaction = async ({
 	return provider.submitTransaction(transaction);
 };
 
-export const getKaspaFeeEstimate = async (
-	network: KaspaNetworkType
-): Promise<KaspaFeeEstimate> => {
+export const getKaspaFeeEstimate = async (network: KaspaNetworkType): Promise<KaspaFeeEstimate> => {
 	const provider = getKaspaApiProvider(network);
 	return provider.getFeeEstimate();
 };
