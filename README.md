@@ -14,6 +14,10 @@
 
 ---
 
+## What is the HOISY wallet
+
+HOISY is a fork of OISY.
+
 ## What is the OISY wallet
 
 OISY is a new browser-based, network-custodial and multi-chain wallet powered by Internet Computer's [chain fusion](https://internetcomputer.org/chainfusion) technology.
