@@ -16,6 +16,7 @@
 	import { modalStore, type OpenTransactionParams } from '$lib/stores/modal.store';
 	import type { OptionToken } from '$lib/types/token';
 	import type { AnyTransactionUi } from '$lib/types/transaction-ui';
+	import { normalizeTimestampToSeconds } from '$icp/utils/date.utils';
 	import {
 		formatSecondsToDate,
 		formatToken,
@@ -32,7 +33,16 @@
 
 	const { transaction, token }: Props = $props();
 
-	let { from, value, timestamp, id, to: toAddresses, type, status, blueScore } = $derived(transaction);
+	let {
+		from,
+		value,
+		timestamp,
+		id,
+		to: toAddresses,
+		type,
+		status,
+		blueScore
+	} = $derived(transaction);
 
 	// Get first recipient address for display
 	let to = $derived(toAddresses?.[0]);
@@ -162,7 +172,7 @@
 
 					<output
 						>{formatSecondsToDate({
-							seconds: Number(timestamp) / 1000,
+							seconds: normalizeTimestampToSeconds(timestamp),
 							language: $currentLanguage
 						})}</output
 					>

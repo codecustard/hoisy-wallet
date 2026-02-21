@@ -62,11 +62,15 @@ export interface KaspaTransactionInput {
 }
 
 /**
- * Transaction output
+ * Transaction output from Kaspa API (uses snake_case)
  */
 export interface KaspaTransactionOutput {
 	amount: string;
-	scriptPublicKey: {
+	script_public_key?: string;
+	script_public_key_address?: string;
+	script_public_key_type?: string;
+	// Legacy fields for compatibility
+	scriptPublicKey?: {
 		scriptPublicKey: string;
 	};
 	verboseData?: {

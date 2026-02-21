@@ -1,6 +1,7 @@
 import type { BtcCertifiedTransactionsData } from '$btc/stores/btc-transactions.store';
 import type { EthCertifiedTransactionsData } from '$eth/stores/eth-transactions.store';
 import type { IcCertifiedTransactionsData } from '$icp/stores/ic-transactions.store';
+import type { KaspaCertifiedTransactionsData } from '$kaspa/stores/kaspa-transactions.store';
 import type { Address } from '$lib/types/address';
 import type { Token } from '$lib/types/token';
 import type { SolCertifiedTransactionsData } from '$sol/stores/sol-transactions.store';
@@ -10,7 +11,8 @@ export interface TransactionsStoreCheckParams {
 		| BtcCertifiedTransactionsData
 		| EthCertifiedTransactionsData
 		| IcCertifiedTransactionsData
-		| SolCertifiedTransactionsData;
+		| SolCertifiedTransactionsData
+		| KaspaCertifiedTransactionsData;
 	tokens: Token[];
 }
 
